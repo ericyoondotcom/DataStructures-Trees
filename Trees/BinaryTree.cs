@@ -46,7 +46,29 @@ namespace Trees
 				AddLoop(newItem, curr.right);
             }
         }
+        public T FindMin(){
+            return FindMinLoop(topNode);
+        }
+        T FindMinLoop(BinaryNode<T> curr){
+            if (curr.left == null){
+                return curr.val;
+            }
+            return FindMinLoop(curr.left);
 
+        }
+		public T FindMax()
+		{
+			return FindMaxLoop(topNode);
+		}
+		T FindMaxLoop(BinaryNode<T> curr)
+		{
+			if (curr.right == null)
+			{
+				return curr.val;
+			}
+			return FindMaxLoop(curr.right);
+
+		}
 
     }
 }

@@ -27,6 +27,8 @@ namespace Trees
             tree.Add(32768);
             tree.Add(1);
             tree.Add(100);
+            Console.WriteLine(tree.FindMin());
+            Console.WriteLine(tree.FindMax());
         }
     }
 }
