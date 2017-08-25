@@ -57,15 +57,6 @@ namespace Trees
         }
 
         /// <summary>
-        /// Add a new node, using a custom function/lambda for sorting.
-        /// </summary>
-        /// <param name="newItem">Value of the new node.</param>
-        /// <param name="compareFunc">Function to decide if the node should go left or right. Return FALSE for left, and TRUE for right. The first arg is the new node, the second is the other compared node.</param>
-        public void Add(T newItem, Func<T, T, bool> compareFunc)
-        {
-            throw new NotImplementedException("Patience! I'm working on it!");
-        }
-        /// <summary>
         /// Helper to Add function. Recursive.
         /// </summary>
         /// <param name="newItem">New node.</param>

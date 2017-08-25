@@ -1,13 +1,41 @@
 ﻿using System;
 
-
 /*
+
+
+**************
+* TO CHANGE! *
+**************
+
+* IsEmpty
+* AVLTree()
+* AVLTree(T firstNodeVal)
+* Add
+    * AddLoop
+* FindMin
+    * FindMinLoop
+    * FindMinNodeLoop
+* FindMax
+    * FindMaxLoop
+* Traverse 
+    * TraverseLoop
+* Search
+    * SearchLoop
+* SearchIterative
+* Delete
+    * DeleteTraversal
+    * DeleteCases
+    * DeleteFindLargestleft
 
 *****************
 * TO IMPLEMENT! *
 *****************
 
-* maybe search and add with lambdas? (I probably want to make a new class)
+                                        ---
+* Rotate Left/Rotate Right                | 
+* Rotate Left-Right/Rotate Right-Left      >  Should probably be all in Add()...
+* FindBalance                             |
+                                        ---    
 
 */
 
@@ -21,6 +49,9 @@ namespace Trees
         {
 
             Console.WriteLine("Hello World!");
+
+
+
            /* var tree = new BinaryTree<int>();
             tree.Add(256);
             tree.Add(512);
@@ -45,7 +76,7 @@ namespace Trees
             Console.WriteLine(tree.IsEmpty);
             //tree.TraverseInOrder();
             //tree.TraversePreOrder();*/
-            var newTree = new BinaryTree<string>();
+           /*var newTree = new BinaryTree<string>();
             newTree.Add("F");
 			newTree.Add("G");
             newTree.Add("I");
@@ -56,7 +87,7 @@ namespace Trees
             newTree.Add("E");
             newTree.Add("A");
             newTree.Traverse(BinaryTree<string>.TraverseMethods.postOrder);
-            newTree.Delete(newTree.Search("D"));
+            newTree.Delete(newTree.Search("D"));*/
             }
     }
 }

@@ -36,6 +36,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BinaryNode.cs" />
     <Compile Include="BinaryTree.cs" />
+    <Compile Include="AVLNode.cs" />
+    <Compile Include="AVLTree.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
