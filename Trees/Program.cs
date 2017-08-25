@@ -1,15 +1,27 @@
 ﻿using System;
 
+
+/*
+
+*****************
+* TO IMPLEMENT! *
+*****************
+
+* maybe search and add with lambdas? (I probably want to make a new class)
+
+*/
+
 namespace Trees
 {
     class MainClass
     {
-		//This is making red-black trees: https://www.youtube.com/watch?v=z1KDRTKpPZw
+		//This is painstakingly coding trees: https://www.youtube.com/watch?v=z1KDRTKpPZw
 
 		public static void Main(string[] args)
         {
+
             Console.WriteLine("Hello World!");
-            var tree = new BinaryTree<int>();
+           /* var tree = new BinaryTree<int>();
             tree.Add(256);
             tree.Add(512);
             tree.Add(128);
@@ -26,9 +38,25 @@ namespace Trees
             tree.Add(2);
             tree.Add(32768);
             tree.Add(1);
-            tree.Add(100);
+
+//            tree.Add(100);
             Console.WriteLine(tree.FindMin());
             Console.WriteLine(tree.FindMax());
-        }
+            Console.WriteLine(tree.IsEmpty);
+            //tree.TraverseInOrder();
+            //tree.TraversePreOrder();*/
+            var newTree = new BinaryTree<string>();
+            newTree.Add("F");
+			newTree.Add("G");
+            newTree.Add("I");
+            newTree.Add("H");
+            newTree.Add("B");
+            newTree.Add("D");
+            newTree.Add("C");
+            newTree.Add("E");
+            newTree.Add("A");
+            newTree.Traverse(BinaryTree<string>.TraverseMethods.postOrder);
+            newTree.Delete(newTree.Search("D"));
+            }
     }
 }
