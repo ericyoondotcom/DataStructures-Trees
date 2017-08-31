@@ -1,17 +1,11 @@
 ﻿using System;
 namespace Trees
 {
-    public class AVLTree<T>
+    public class AVLTree<T> where T : IComparable
     {
-		/// <summary>
-		/// The first node in the tree.
-		/// </summary>
-		public BinaryNode<T> topNode;
 
-		/// <summary>
-		/// Checks whether the tree is empty.
-		/// </summary>
-		/// <value><c>true</c> if is empty; otherwise, <c>false</c>.</value>
+		public AVLNode<T> topNode;
+
 		public bool IsEmpty
 		{
 			get
@@ -20,46 +14,31 @@ namespace Trees
 			}
 		}
 
-		/// <summary>
-		/// Creates a new, empty <see cref="T:Trees.BinaryTree"/> class. Like a sapling!
-		/// </summary>
 		public AVLTree()
 		{
 			topNode = null;
 		}
 
-		/// <summary>
-		/// Creates a new <see cref="T:Trees.BinaryTree"/> class with the first nodze. Like a sapling!
-		/// </summary>
-		/// <param name="firstNodeVal">Top/first node value.</param>
-		public BinaryTree(T firstNodeVal)
+
+		public AVLTree(T firstNodeVal)
 		{
 
-			topNode = new BinaryNode<T>(firstNodeVal);
+			topNode = new AVLNode<T>(firstNodeVal);
 
 		}
 
-		/// <summary>
-		/// Add a new node, automatically finding where it should go with its CompareTo function.
-		/// </summary>
-		/// <param name="newItem">Value of the new node.</param>
 		public void Add(T newItem)
 		{
 			if (topNode == null)
 			{
-				topNode = new BinaryNode<T>(newItem);
+				topNode = new AVLNode<T>(newItem);
 				return;
 			}
 
-			AddLoop(new BinaryNode<T>(newItem), topNode);
+			AddLoop(new AVLNode<T>(newItem), topNode);
 		}
 
-		/// <summary>
-		/// Helper to Add function. Recursive.
-		/// </summary>
-		/// <param name="newItem">New node.</param>
-		/// <param name="curr">Current node, used for recursion.</param>
-		void AddLoop(BinaryNode<T> newItem, BinaryNode<T> curr)
+		void AddLoop(AVLNode<T> newItem, AVLNode<T> curr)
 		{
 			int comparison = newItem.val.CompareTo(curr.val);
 
@@ -85,20 +64,12 @@ namespace Trees
 			}
 		}
 
-		/// <summary>
-		/// Finds the node with the minimum value.
-		/// </summary>
-		/// <returns>The value of the minimum node.</returns>
 		public T FindMin()
 		{
 			return FindMinLoop(topNode);
 		}
-		/// <summary>
-		/// Helper function to FindMin(). Recursive.
-		/// </summary>
-		/// <returns>Value of the minimum node</returns>
-		/// <param name="curr">Current node, used for recursion.</param>
-		T FindMinLoop(BinaryNode<T> curr)
+
+		T FindMinLoop(AVLNode<T> curr)
 		{
 			if (curr.left == null)
 			{
@@ -108,12 +79,7 @@ namespace Trees
 
 		}
 
-		/// <summary>
-		/// Finds the minimum node.
-		/// </summary>
-		/// <returns>The minimum node.</returns>
-		/// <param name="curr">The current node. If calling, this is usually topNode</param>
-		BinaryNode<T> FindMinNodeLoop(BinaryNode<T> curr)
+		AVLNode<T> FindMinNodeLoop(AVLNode<T> curr)
 		{
 			if (curr.left == null)
 			{
@@ -123,20 +89,12 @@ namespace Trees
 
 		}
 
-		/// <summary>
-		/// Find the node with the maximum value.
-		/// </summary>
-		/// <returns>The value of the maximum node.</returns>
 		public T FindMax()
 		{
 			return FindMaxLoop(topNode);
 		}
-		/// <summary>
-		/// Helper function to FindMax(). Recursive.
-		/// </summary>
-		/// <returns>The value of the maximum node.</returns>
-		/// <param name="curr">The current node, used for recursion</param>
-		T FindMaxLoop(BinaryNode<T> curr)
+
+		T FindMaxLoop(AVLNode<T> curr)
 		{
 			if (curr.right == null)
 			{
@@ -145,65 +103,8 @@ namespace Trees
 			return FindMaxLoop(curr.right);
 
 		}
-		/// <summary>
-		/// Traverses the tree in order. Logs the output to console.
-		/// </summary>
-		[Obsolete("Please use Traverse(TraverseMethods.inOrder) instead.")]
-		public void TraverseInOrder()
-		{
-			Console.Write("In-Order: ");
-			if (topNode == null)
-				return;
 
 
-			TraverseInOrderLoop(topNode);
-			Console.Write("\n");
-		}
-
-		/// <summary>
-		/// Helper function to TraverseInOrder. Recursive.
-		/// </summary>
-		/// <param name="current">The current node</param>
-		void TraverseInOrderLoop(BinaryNode<T> current)
-		{
-			if (current.left != null)
-				TraverseInOrderLoop(current.left);
-
-			Console.Write(current.val + ", ");
-
-			if (current.right != null)
-				TraverseInOrderLoop(current.right);
-		}
-
-
-		/// <summary>
-		/// Traverses the tree pre-order. Logs the output to console.
-		/// </summary>
-		[Obsolete("Please use Traverse(TraverseMethods.preOrder) instead.")]
-		public void TraversePreOrder()
-		{
-			Console.Write("Pre-Order: ");
-			if (topNode == null) return;
-			TraversePreOrderLoop(topNode);
-			Console.Write("\n");
-		}
-
-		/// <summary>
-		/// Helper function to TraversePreOrder. Recursive.
-		/// </summary>
-		/// <param name="curr">The current node.</param>
-		void TraversePreOrderLoop(BinaryNode<T> curr)
-		{
-			Console.Write(curr.val + ", ");
-			if (curr.left != null)
-				TraversePreOrderLoop(curr.left);
-			if (curr.right != null)
-				TraversePreOrderLoop(curr.right);
-		}
-
-		/// <summary>
-		/// Traversal methods.
-		/// </summary>
 		public enum TraverseMethods
 		{
 			inOrder,
@@ -211,10 +112,6 @@ namespace Trees
 			postOrder
 		}
 
-		/// <summary>
-		/// Traverse the tree.
-		/// </summary>
-		/// <param name="method">The method for the traversal.</param>
 		public void Traverse(TraverseMethods method)
 		{
 			Console.Write("Traversing tree " + method.ToString() + ": ");
@@ -222,14 +119,10 @@ namespace Trees
 			TraverseLoop(topNode, method);
 			Console.Write("\n");
 		}
-		/// <summary>
-		/// Helper function to Traverse. Recursive.
-		/// </summary>
-		/// <param name="current">The current node.</param>
-		/// <param name="method">The traversal method.</param>
-		void TraverseLoop(BinaryNode<T> current, TraverseMethods method)
+
+		void TraverseLoop(AVLNode<T> current, TraverseMethods method)
 		{
-			//Sorry, the writer of this function is allergic to curly braces!!
+
 			if (method == TraverseMethods.preOrder)
 				Console.Write(current.val + ", ");
 
@@ -247,12 +140,8 @@ namespace Trees
 
 		}
 
-		/// <summary>
-		/// Search for the specified value, and get the topmost node with the value.
-		/// </summary>
-		/// <returns>The topmost node with the value.</returns>
-		/// <param name="val">The value to search for.</param>
-		public BinaryNode<T> Search(T val)
+
+		public AVLNode<T> Search(T val)
 		{
 			if (topNode == null)
 			{
@@ -262,13 +151,8 @@ namespace Trees
 
 		}
 
-		/// <summary>
-		/// Helper function to Search. Recursive.
-		/// </summary>
-		/// <returns>The node with the val.</returns>
-		/// <param name="val">The value to search for.</param>
-		/// <param name="curr">The current node being searched.</param>
-		BinaryNode<T> SearchLoop(T val, BinaryNode<T> curr)
+
+		AVLNode<T> SearchLoop(T val, AVLNode<T> curr)
 		{
 
 			int comparison = curr.val.CompareTo(val);
@@ -292,15 +176,10 @@ namespace Trees
 			throw new Exception("Something went really wrong!");
 		}
 
-		/// <summary>
-		/// Searches for the specified value, and returns the topmost node.
-		/// </summary>
-		/// <returns>The topmost node with the specified value.</returns>
-		/// <param name="valToFind">The value to find.</param>
-		// This is literally copypasta from my recursive search, with some minor changes...
-		public BinaryNode<T> SearchIterative(T valToFind)
+
+		public AVLNode<T> SearchIterative(T valToFind)
 		{
-			BinaryNode<T> current = topNode;
+			AVLNode<T> current = topNode;
 			while (true)
 			{
 				int comparison = current.val.CompareTo(valToFind);
@@ -314,7 +193,7 @@ namespace Trees
 						return null;
 
 					current = current.left;
-					continue; //this is a result of literally copying my code from recursive find... I was too lazy to put in else's
+					continue; 
 				}
 				if (comparison < 0)
 				{
@@ -329,11 +208,8 @@ namespace Trees
 			}
 		}
 
-		/// <summary>
-		/// Delete the specified node.
-		/// </summary>
-		/// <param name="node">The node to be deleted.</param>
-		public void Delete(BinaryNode<T> node)
+	
+		public void Delete(AVLNode<T> node)
 		{
 			if (topNode == null)
 				return;
@@ -360,12 +236,8 @@ namespace Trees
 			DeleteTraversal(node, topNode);
 		}
 
-		/// <summary>
-		/// Helper function to Delete, traverses in order then calls DeleteCases.
-		/// </summary>
-		/// <param name="node">The node to be deleted.</param>
-		/// <param name="curr">The current node.</param>
-		void DeleteTraversal(BinaryNode<T> node, BinaryNode<T> curr)
+
+		void DeleteTraversal(AVLNode<T> node, AVLNode<T> curr)
 		{
 
 			if (curr.left != null)
@@ -390,13 +262,7 @@ namespace Trees
 
 		}
 
-		/// <summary>
-		/// Calculates how to delete the node. Helper to Delete.
-		/// </summary>
-		/// <param name="node">The node to be deleted.</param>
-		/// <param name="parent">The parent of the node to be deleted.</param>
-		/// <param name="right">The direction of the link from the parent to this node. If <c>true</c>, right, else if <c>false</c>, left.</param>
-		void DeleteCases(BinaryNode<T> node, BinaryNode<T> parent, bool right)
+		void DeleteCases(AVLNode<T> node, AVLNode<T> parent, bool right)
 		{
 			if (node.left == null && node.right == null)
 			{
@@ -438,12 +304,7 @@ namespace Trees
 		}
 
 
-		/// <summary>
-		/// Only called from DeleteCases, when the node has both left and right children. Finds the largest node, deletes it, and returns it's value.
-		/// </summary>
-		/// <returns>The value of the largest node.</returns>
-		/// <param name="curr">The current node.</param>
-		T DeleteFindLargestLeft(BinaryNode<T> curr)
+		T DeleteFindLargestLeft(AVLNode<T> curr)
 		{
 			if (curr.right == null)
 			{

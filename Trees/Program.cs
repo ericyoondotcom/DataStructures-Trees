@@ -2,31 +2,6 @@
 
 /*
 
-
-**************
-* TO CHANGE! *
-**************
-
-* IsEmpty
-* AVLTree()
-* AVLTree(T firstNodeVal)
-* Add
-    * AddLoop
-* FindMin
-    * FindMinLoop
-    * FindMinNodeLoop
-* FindMax
-    * FindMaxLoop
-* Traverse 
-    * TraverseLoop
-* Search
-    * SearchLoop
-* SearchIterative
-* Delete
-    * DeleteTraversal
-    * DeleteCases
-    * DeleteFindLargestleft
-
 *****************
 * TO IMPLEMENT! *
 *****************
@@ -50,8 +25,15 @@ namespace Trees
 
             Console.WriteLine("Hello World!");
 
-
-
+            var tree = new AVLTree<int>();
+            tree.Add(10);
+            tree.Add(8);
+            tree.Add(15);
+            tree.Add(16);
+            tree.Add(13);
+            tree.Add(14);
+            tree.Add(12);
+            Console.WriteLine(tree.Search(15).Balance);
            /* var tree = new BinaryTree<int>();
             tree.Add(256);
             tree.Add(512);
