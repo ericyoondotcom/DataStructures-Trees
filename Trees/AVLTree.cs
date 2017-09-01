@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace Trees
 {
     public class AVLTree<T> where T : IComparable
@@ -51,6 +53,7 @@ namespace Trees
 					return;
 				}
 				AddLoop(newItem, curr.left);
+
 			}
 			else
 			{
@@ -175,6 +178,7 @@ namespace Trees
 
 			throw new Exception("Something went really wrong!");
 		}
+
 
 
 		public AVLNode<T> SearchIterative(T valToFind)
@@ -317,6 +321,60 @@ namespace Trees
 				return DeleteFindLargestLeft(curr.right);
 			}
 		}
+
+        void RotationCheck(AVLNode<T> node){
+            var nodes = new List<AVLNode<T>>();
+			AVLNode<T> current = topNode;
+			while (true)
+			{
+                if(current == node){
+                    break;
+                }
+                int comparison = current.val.CompareTo(node.val);
+
+                if (comparison > 0)
+                {
+                    if (current.left == null)
+                        throw new Exception("Tried to RotateCheck a node that doesn't! (current.left == null)");
+
+                    current = current.left;
+                    nodes.Add(current);
+                    continue;
+                }
+                else
+                {
+
+                    if (current.right == null)
+                        throw new Exception("Tried to RotateCheck a node that doesn't exist! (current.right == null)");
+
+                    current = current.right;
+                    nodes.Add(current);
+                    continue;
+
+                }
+			}
+
+            for (int i = nodes.Count - 1; i >= 0; i--){
+                AVLNode<T> me = nodes[i];
+                AVLNode<T> parent;
+                if (i == 0){
+                    parent = null;
+                }else{
+                    parent = nodes[i - 1];
+                }
+                int balance = me.Balance;
+
+
+                //do the rotation check
+                if(Math.Abs(balance) <= 1){
+                    continue;
+                }
+
+
+
+            }
+
+        }
 
 	}
 }
