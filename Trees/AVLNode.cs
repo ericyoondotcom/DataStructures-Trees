@@ -7,40 +7,55 @@ namespace Trees
         public AVLNode<T> right;
         public T val;
 
-        public int Balance{
-            get{
+        public int Balance
+        {
+            get
+            {
                 int leftHeight = 0;
                 int rightHeight = 0;
-                if (left == null){
+                if (left == null)
+                {
                     leftHeight = 0;
-                }else{
+                }
+                else
+                {
                     leftHeight = left.Height;
                 }
-                if(right == null){
+                if (right == null)
+                {
                     rightHeight = 0;
-                }else{
+                }
+                else
+                {
                     rightHeight = right.Height;
                 }
 
                 return rightHeight - leftHeight;
             }
         }
-        public int Height{
-            get{
+        public int Height
+        {
+            get
+            {
                 if (left == null && right == null)
                     return 1;
-                
-				int leftHeight;
+
+                int leftHeight;
                 if (left == null)
-				{
-					leftHeight = 0;
-                }else{
+                {
+                    leftHeight = 0;
+                }
+                else
+                {
                     leftHeight = left.Height;
                 }
                 int rightHeight;
-                if(right == null){
+                if (right == null)
+                {
                     rightHeight = 0;
-                }else{
+                }
+                else
+                {
                     rightHeight = right.Height;
                 }
 
