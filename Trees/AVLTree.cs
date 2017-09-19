@@ -37,11 +37,13 @@ namespace Trees
 				return;
 			}
 
-			AddLoop(new AVLNode<T>(newItem), topNode);
+			AddLoop(new AVLNode<T>(newItem), topNode, new List<AVLNode<T>>());
 		}
 
-		void AddLoop(AVLNode<T> newItem, AVLNode<T> curr)
+        void AddLoop(AVLNode<T> newItem, AVLNode<T> curr, List<AVLNode<T>> path)
 		{
+            var newPath = path;
+            newPath.Add(curr);
 			int comparison = newItem.val.CompareTo(curr.val);
 
 			if (comparison < 0)
@@ -50,9 +52,11 @@ namespace Trees
 				if (curr.left == null)
 				{
 					curr.left = newItem;
+                    RotationLoop(curr.left, newPath);
 					return;
 				}
-				AddLoop(newItem, curr.left);
+                AddLoop(newItem, curr.left, newPath);
+
 
 			}
 			else
@@ -61,12 +65,72 @@ namespace Trees
 				if (curr.right == null)
 				{
 					curr.right = newItem;
+                    RotationLoop(curr.right, newPath);
 					return;
 				}
-				AddLoop(newItem, curr.right);
+				AddLoop(newItem, curr.right, newPath);
 			}
 		}
+        void RotationLoop(AVLNode<T> newItem, List<AVLNode<T>> path){
+            for (int i = path.Count - 1; i >= 0; i--){ //go through the path backwards.
+                var me = path[i];
+                if(path[i].Balance > 1){
+                    //left rot!
+                    Console.WriteLine("Doing a left rotation!");
+                    var child = me.right;
+                    child.right = me.right;
+                    me.right = null;
 
+                    if(i == 0){
+                        topNode = child;
+                    }else{
+                        var parent = path[i - 1];
+                        if (parent.left == me)
+                        {
+                            parent.left = child;
+                        }
+                        else if(parent.right == me){
+                            parent.right = child;
+                        }else{
+                            throw new Exception("Luke... I'm... Not... Your... Father!");
+                        }
+                    }
+
+                    child.left = me;
+
+                }
+                if(path[i].Balance < -1){
+                    //right rot!
+                    Console.WriteLine("Doing a right rotation!");
+                    var child = me.left;
+                    child.left = me.left;
+					me.left = null;
+
+					if (i == 0)
+					{
+						topNode = child;
+					}
+					else
+					{
+						var parent = path[i - 1];
+						if (parent.left == me)
+						{
+							parent.left = child;
+						}
+						else if (parent.right == me)
+						{
+							parent.right = child;
+						}
+						else
+						{
+							throw new Exception("Luke... I'm... Not... Your... Father!");
+						}
+					}
+
+					child.right = me;
+                }
+            }
+        }
 		public T FindMin()
 		{
 			return FindMinLoop(topNode);

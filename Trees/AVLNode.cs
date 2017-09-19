@@ -9,8 +9,8 @@ namespace Trees
 
         public int Balance{
             get{
-                int leftHeight;
-                int rightHeight;
+                int leftHeight = 0;
+                int rightHeight = 0;
                 if (left == null){
                     leftHeight = 0;
                 }else{

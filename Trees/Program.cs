@@ -12,6 +12,13 @@
 * FindBalance                             |
                                         ---    
 
+StackOverflow exception...
+on tree.Add(12) which is the only one that requires a rotation.
+It goes thhrough the for loop once and it is fine.
+On the second pass, it checks thhe first if. It throws the exception in the check. (in balance, on line 17)
+
+
+
 */
 
 namespace Trees
