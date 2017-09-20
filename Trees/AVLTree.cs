@@ -80,66 +80,126 @@ namespace Trees
                 var me = path[i];
                 if (path[i].Balance > 1)
                 {
-                    //left rot!
-                    Console.WriteLine("Doing a left rotation!");
                     var child = me.right;
-                    child.right = me.right?.right;
-                    me.right = null;
+                    
+                    if (child.left == null)      
+                    {
 
-                    if (i == 0)
-                    {
-                        topNode = child;
-                    }
-                    else
-                    {
-                        var parent = path[i - 1];
-                        if (parent.left == me)
+
+                        //left rot!
+                        Console.WriteLine("Doing a left rotation!");
+                        child.right = me.right?.right;
+
+                        me.right = null;
+
+                        if (i == 0)
                         {
-                            parent.left = child;
-                        }
-                        else if (parent.right == me)
-                        {
-                            parent.right = child;
+                            topNode = child;
                         }
                         else
                         {
-                            throw new Exception("Luke... I'm... Not... Your... Father!");
+                            var parent = path[i - 1];
+                            if (parent.left == me)
+                            {
+                                parent.left = child;
+                            }
+                            else if (parent.right == me)
+                            {
+                                parent.right = child;
+                            }
+                            else
+                            {
+                                throw new Exception("Luke... I'm... Not... Your... Father!");
+                            }
                         }
+
+                        child.left = me;
+
+
+                    }
+                    else
+                    {
+                        //right left  rot!
+                        Console.WriteLine("Doing a right left rot!");
+
+                        var grandchild = child.left;
+                        grandchild.right = child;
+                        child = grandchild;
+                        //me.right = grandchild;
+
+                        child.left = me;
+                        if(i == 0)
+                        {
+                            topNode = child;
+                        }
+                        else
+                        {
+                            var parent = path[i - 1];
+                            if(parent.left == me)
+                            {
+                                parent.left = child;
+
+                            }else if(parent.right == me)
+                            {
+                                parent.right = child;
+                            }
+                            else
+                            {
+                                throw new Exception("Oops, parent doesn't has child!");
+                            }
+                        }
+                        
+
+
+
                     }
 
-                    child.left = me;
+
 
                 }
                 if (path[i].Balance < -1)
                 {
-                    //right rot!
-                    Console.WriteLine("Doing a right rotation!");
-                    var child = me.left;
-                    child.left = me.left?.left;
-                    me.left = null;
 
-                    if (i == 0)
-                    {
-                        topNode = child;
-                    }
-                    else
-                    {
-                        var parent = path[i - 1];
-                        if (parent.left == me)
+
+                    var child = me.left;
+
+
+                    if (child.right == null) {
+                        //right rot!
+                        Console.WriteLine("Doing a right rotation!");
+                       
+                        child.left = me.left?.left;
+                        me.left = null;
+
+                        if (i == 0)
                         {
-                            parent.left = child;
-                        }
-                        else if (parent.right == me)
-                        {
-                            parent.right = child;
+                            topNode = child;
                         }
                         else
                         {
-                            throw new Exception("Luke... I'm... Not... Your... Father!");
+                            var parent = path[i - 1];
+                            if (parent.left == me)
+                            {
+                                parent.left = child;
+                            }
+                            else if (parent.right == me)
+                            {
+                                parent.right = child;
+                            }
+                            else
+                            {
+                                throw new Exception("Luke... I'm... Not... Your... Father!");
+                            }
                         }
-                    }
 
-                    child.right = me;
+                        child.right = me;
+                    }
+                    else
+                    {
+                        //left right rot!
+                        Console.WriteLine("Doing a left right = rot!");
+
+                    }
                 }
             }
         }

@@ -6,18 +6,7 @@
 * TO IMPLEMENT! *
 *****************
 
-                                        ---
-* Rotate Left/Rotate Right                | 
-* Rotate Left-Right/Rotate Right-Left      >  Should probably be all in Add()...
-* FindBalance                             |
-                                        ---    
-
-StackOverflow exception...
-on tree.Add(12) which is the only one that requires a rotation.
-It goes thhrough the for loop once and it is fine.
-On the second pass, it checks thhe first if. It throws the exception in the check. (in balance, on line 17)
-
-
+* Rotate Left-Right/Rotate Right-Left
 
 */
 
@@ -33,14 +22,18 @@ namespace Trees
             Console.WriteLine("Hello World!");
 
             var tree = new AVLTree<int>();
-            tree.Add(10);
-            tree.Add(8);
-            tree.Add(15);
-            tree.Add(16);
-            tree.Add(13);
-            tree.Add(14);
-            tree.Add(12);
-            Console.WriteLine(tree.Search(15).Balance);
+            /* tree.Add(10);
+             tree.Add(8);
+             tree.Add(15);
+             tree.Add(16);
+             tree.Add(13);
+             tree.Add(14);
+             tree.Add(12);
+             */
+            tree.Add(1);
+            tree.Add(3);
+            tree.Add(2);
+            //Console.WriteLine(tree.Search(15).Balance);
            /* var tree = new BinaryTree<int>();
             tree.Add(256);
             tree.Add(512);
