@@ -6,8 +6,7 @@
 * TO IMPLEMENT! *
 *****************
 
-* Rotate Left-Right/Rotate Right-Left
-
+* Test case below not working!
 */
 
 namespace Trees
@@ -30,10 +29,13 @@ namespace Trees
              tree.Add(14);
              tree.Add(12);
              */
-            tree.Add(1);
+            tree.Add(5);
             tree.Add(3);
             tree.Add(2);
-            //Console.WriteLine(tree.Search(15).Balance);
+            tree.Add(7);
+            tree.Add(9);
+            tree.Add(10);
+               //Console.WriteLine(tree.Search(15).Balance);
            /* var tree = new BinaryTree<int>();
             tree.Add(256);
             tree.Add(512);

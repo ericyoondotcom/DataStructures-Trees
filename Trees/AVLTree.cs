@@ -119,40 +119,44 @@ namespace Trees
                     }
                     else
                     {
-                        //right left  rot!
-                        Console.WriteLine("Doing a right left rot!");
-
+                        //left right rot!
+                        Console.WriteLine("Doing a left right rot!");
                         var grandchild = child.left;
-                        grandchild.right = child;
-                        child = grandchild;
-                        //me.right = grandchild;
+						var greatchildright = grandchild.right;
+						grandchild.right = child;
+                        child.left = greatchildright;
+						child = grandchild;
+						me.right = child;
 
-                        child.left = me;
-                        if(i == 0)
-                        {
-                            topNode = child;
-                        }
-                        else
-                        {
-                            var parent = path[i - 1];
-                            if(parent.left == me)
-                            {
-                                parent.left = child;
+						//now rotate left
 
-                            }else if(parent.right == me)
-                            {
-                                parent.right = child;
-                            }
-                            else
-                            {
-                                throw new Exception("Oops, parent doesn't has child!");
-                            }
-                        }
-                        
+						child.right = me.right?.right;
 
+						me.right = null;
 
+						if (i == 0)
+						{
+							topNode = child;
+						}
+						else
+						{
+							var parent = path[i - 1];
+							if (parent.left == me)
+							{
+								parent.left = child;
+							}
+							else if (parent.right == me)
+							{
+								parent.right = child;
+							}
+							else
+							{
+								throw new Exception("Luke... I'm... Not... Your... Father!");
+							}
+						}
 
-                    }
+						child.left = me;
+					}
 
 
 
@@ -196,10 +200,46 @@ namespace Trees
                     }
                     else
                     {
-                        //left right rot!
-                        Console.WriteLine("Doing a left right = rot!");
+                        //right left rot!
+                        Console.WriteLine("Doing a right left rot!");
 
-                    }
+						var grandchild = child.right;
+						var greatchildleft = grandchild.left;
+						grandchild.left = child;
+                        child.right = greatchildleft;
+						child = grandchild;
+                        me.left = child;
+
+						//now rotate right
+						child.left = me.left?.left;
+						me.left = null;
+
+						if (i == 0)
+						{
+							topNode = child;
+						}
+						else
+						{
+							var parent = path[i - 1];
+							if (parent.left == me)
+							{
+								parent.left = child;
+							}
+							else if (parent.right == me)
+							{
+								parent.right = child;
+							}
+							else
+							{
+								throw new Exception("Luke... I'm... Not... Your... Father!");
+							}
+						}
+
+						child.right = me;
+
+
+
+					}
                 }
             }
         }
