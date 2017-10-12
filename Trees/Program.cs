@@ -7,6 +7,12 @@
 *****************
 
 * Test case below not working!
+
+So whats going on:
+Everything up to tree add 10 works.
+Then, in tree add ten, it correctly finds no unbalances until the top one.
+All is good, but then it goes into left right instead of left.
+
 */
 
 namespace Trees
