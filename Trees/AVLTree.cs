@@ -82,7 +82,7 @@ namespace Trees
                 {
                     var child = me.right;
                     
-                    if (child.right.Balance >= 0)      
+                    if (child.Balance >= 0)      
                     {
 
 
@@ -133,7 +133,7 @@ namespace Trees
 
 						child.right = me.right?.right;
 
-						me.right = null;
+                        me.right = child.left;
 
 						if (i == 0)
 						{
@@ -166,10 +166,10 @@ namespace Trees
                 {
 
 
-                    var child = me.left;
+                    var child = me.left; 
 
 
-                    if (child.left.Balance <= 0) {
+                    if (child.Balance <= 0) {
                         //right rot!
                         Console.WriteLine("Doing a right rotation!");
                        
@@ -213,7 +213,7 @@ namespace Trees
 
 						//now rotate right
 						child.left = me.left?.left;
-						me.left = null;
+						me.left = child.right;
 
 						if (i == 0)
 						{
