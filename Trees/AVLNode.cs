@@ -6,6 +6,7 @@ namespace Trees
         public AVLNode<T> left;
         public AVLNode<T> right;
         public T val;
+        public AVLNode<T> parent;
 
         public int Balance
         {
@@ -62,7 +63,7 @@ namespace Trees
                 return ((leftHeight < rightHeight) ? rightHeight + 1 : leftHeight + 1);
             }
         }
-        public AVLNode(T val, AVLNode<T> leftNode = null, AVLNode<T> rightNode = null)
+        public AVLNode(T val, AVLNode<T> leftNode = null, AVLNode<T> rightNode = null, AVLNode<T> parent = null)
         {
             this.val = val;
             left = leftNode;

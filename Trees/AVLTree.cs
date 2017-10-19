@@ -37,13 +37,11 @@ namespace Trees
                 return;
             }
 
-            AddLoop(new AVLNode<T>(newItem), topNode, new List<AVLNode<T>>());
+            AddLoop(new AVLNode<T>(newItem), topNode);
         }
 
-        void AddLoop(AVLNode<T> newItem, AVLNode<T> curr, List<AVLNode<T>> path)
+        void AddLoop(AVLNode<T> newItem, AVLNode<T> curr)
         {
-            var newPath = path;
-            newPath.Add(curr);
             int comparison = newItem.val.CompareTo(curr.val);
 
             if (comparison < 0)
@@ -51,11 +49,12 @@ namespace Trees
                 //left
                 if (curr.left == null)
                 {
+                    newItem.parent = curr;
                     curr.left = newItem;
-                    RotationLoop(curr.left, newPath);
+                    RotationLoop(curr.left);
                     return;
                 }
-                AddLoop(newItem, curr.left, newPath);
+                AddLoop(newItem, curr.left);
 
 
             }
@@ -64,21 +63,21 @@ namespace Trees
                 //right
                 if (curr.right == null)
                 {
+                    newItem.parent = curr;
                     curr.right = newItem;
-                    RotationLoop(curr.right, newPath);
+                    RotationLoop(curr.right);
                     return;
                 }
-                AddLoop(newItem, curr.right, newPath);
+                AddLoop(newItem, curr.right);
             }
         }
 
-        void RotationLoop(AVLNode<T> newItem, List<AVLNode<T>> path)
+        void RotationLoop(AVLNode<T> newItem)
         {
-            for (int i = path.Count - 1; i >= 0; i--)
-            { 
-                //go through the path backwards.
-                var me = path[i];
-                if (path[i].Balance > 1)
+            var me = newItem;
+            while(me != null){
+                
+                if (me.Balance > 1)
                 {
                     var child = me.right;
                     
@@ -92,30 +91,31 @@ namespace Trees
 
                         me.right = child.left;
 
-                        if (i == 0)
+                        if (me.parent == null)
                         {
                             topNode = child;
 
                         }
                         else
                         {
-                            var parent = path[i - 1];
-                            if (parent.left == me)
+                            
+                            if (me.parent.left == me)
                             {
-                                parent.left = child;
+                                me.parent.left = child;
                             }
-                            else if (parent.right == me)
+                            else if (me.parent.right == me)
                             {
-                                parent.right = child;
+                                me.parent.right = child;
                             }
                             else
                             {
                                 throw new Exception("Luke... I'm... Not... Your... Father!");
                             }
                         }
+                        child.parent = me.parent;
 
                         child.left = me;
-
+                        me.parent = child;
 
                     }
                     else
@@ -135,34 +135,35 @@ namespace Trees
 
                         me.right = child.left;
 
-						if (i == 0)
+						if (me.parent == null)
 						{
 							topNode = child;
 						}
 						else
 						{
-							var parent = path[i - 1];
-							if (parent.left == me)
+							
+							if (me.parent.left == me)
 							{
-								parent.left = child;
+								me.parent.left = child;
 							}
-							else if (parent.right == me)
+							else if (me.parent.right == me)
 							{
-								parent.right = child;
+								me.parent.right = child;
 							}
 							else
 							{
 								throw new Exception("Luke... I'm... Not... Your... Father!");
 							}
 						}
-
+                        child.parent = me.parent;
 						child.left = me;
+                        me.parent = child;
 					}
-
+                  
 
 
                 }
-                if (path[i].Balance < -1)
+                if (me.Balance < -1)
                 {
 
 
@@ -176,28 +177,29 @@ namespace Trees
                         child.left = me.left?.left;
                         me.left = child.right;
 
-                        if (i == 0)
+                        if (me.parent == null)
                         {
                             topNode = child;
                         }
                         else
                         {
-                            var parent = path[i - 1];
-                            if (parent.left == me)
+                            
+                            if (me.parent.left == me)
                             {
-                                parent.left = child;
+                                me.parent.left = child;
                             }
-                            else if (parent.right == me)
+                            else if (me.parent.right == me)
                             {
-                                parent.right = child;
+                                me.parent.right = child;
                             }
                             else
                             {
                                 throw new Exception("Luke... I'm... Not... Your... Father!");
                             }
                         }
-
+                        child.parent = me.parent;
                         child.right = me;
+                        me.parent = child;
                     }
                     else
                     {
@@ -215,33 +217,34 @@ namespace Trees
 						child.left = me.left?.left;
 						me.left = child.right;
 
-						if (i == 0)
+						if (me.parent == null)
 						{
 							topNode = child;
 						}
 						else
 						{
-							var parent = path[i - 1];
-							if (parent.left == me)
+							
+							if (me.parent.left == me)
 							{
-								parent.left = child;
+								me.parent.left = child;
 							}
-							else if (parent.right == me)
+							else if (me.parent.right == me)
 							{
-								parent.right = child;
+								me.parent.right = child;
 							}
 							else
 							{
 								throw new Exception("Luke... I'm... Not... Your... Father!");
 							}
 						}
-
+                        child.parent = me.parent;
 						child.right = me;
-
+                        me.parent = child;
 
 
 					}
                 }
+                me = me.parent;
             }
         }
         public T FindMin()
