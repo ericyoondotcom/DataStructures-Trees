@@ -35,11 +35,11 @@ namespace Trees
             tree.Add(6);
             tree.Add(5);
             tree.Add(4);*/
-            tree.Add(2);
-            tree.Add(1);
             tree.Add(3);
-
-           
+            tree.Add(1);
+            tree.Add(2);
+            if (tree.topNode.left.parent == tree.topNode && tree.topNode.right.parent == tree.topNode)
+                Console.WriteLine("success");
             }
     }
 }
