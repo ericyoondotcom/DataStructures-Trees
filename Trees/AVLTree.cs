@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 
 namespace Trees
@@ -89,11 +89,16 @@ namespace Trees
                         Console.WriteLine("Doing a left rotation!");
                         child.right = me.right?.right;
 
-						if (me.right.right != null)
-							me.right.right.parent = child;
+                        if (me.right.right != null)
+                        {
+                            me.right.right.parent = child;
+                        }
 
                         me.right = child.left;
-                        child.left.parent = me;
+                        if (child.left != null)
+                        {
+                            child.left.parent = me;
+                        }
 
                         if (me.parent == null)
                         {
@@ -131,6 +136,7 @@ namespace Trees
 						grandchild.right = child;
                         child.parent = grandchild;
                         child.left = greatchildright;
+                        if(greatchildright != null)
                         greatchildright.parent = child;
 						child = grandchild;
 						me.right = child;
@@ -143,6 +149,7 @@ namespace Trees
                         me.right.right.parent = child;
 
                         me.right = child.left;
+                        if (child.left != null)
                         child.left.parent = me;
 
 						if (me.parent == null)
@@ -189,6 +196,7 @@ namespace Trees
                             me.left.left.parent = child; 
                         }
                         me.left = child.right;
+                        if(child.right != null)
                         child.right.parent = me;
 
 
@@ -226,6 +234,7 @@ namespace Trees
 						grandchild.left = child;
                         child.parent = grandchild;
                         child.right = greatchildleft;
+                        if(greatchildleft != null)
                         greatchildleft.parent = child;
 						child = grandchild;
 
@@ -239,6 +248,7 @@ namespace Trees
 							me.left.left.parent = child;
 						}
 						me.left = child.right;
+                        if(child.right != null)
 						child.right.parent = me;
 
 						if (me.parent == null)

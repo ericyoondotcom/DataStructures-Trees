@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 
 /*
 
@@ -35,11 +35,20 @@ namespace Trees
             tree.Add(6);
             tree.Add(5);
             tree.Add(4);*/
-            tree.Add(3);
+            /*tree.Add(10);
             tree.Add(1);
-            tree.Add(2);
-            if (tree.topNode.left.parent == tree.topNode && tree.topNode.right.parent == tree.topNode)
-                Console.WriteLine("success");
+            tree.Add(13);*/
+            /*tree.Add(14);
+            tree.Add(16);
+            tree.Add(15);*/
+
+            Random randy = new Random();
+            Console.WriteLine("Running the AlexTester machine!");
+            for (int i = 0; i < 15; i++){
+                var rando = randy.Next(0, 20);
+                Console.WriteLine(rando);
+                tree.Add(rando);
             }
+        }
     }
 }
