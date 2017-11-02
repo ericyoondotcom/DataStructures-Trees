@@ -72,6 +72,16 @@ namespace Trees
             }
         }
 
+/*        public IEnumerable<AVLNode<T>> InOrder()
+        {
+            AVLNode<T> tempNode = topNode;
+            while (tempNode != null)
+            {
+                yield return tempNode;
+
+            }
+        }
+        */
         void RotationLoop(AVLNode<T> newItem)
         {
             var me = newItem;
