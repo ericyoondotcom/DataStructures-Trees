@@ -2,7 +2,7 @@
 
 namespace Trees
 {
-    class RBValNode<T>
+    class RBValNode<T> : RBNode<T>
     {
 
         public RBNode<T> left { get; set; }
@@ -14,70 +14,14 @@ namespace Trees
 
 
 
-        public RBNode(T val, RBNode<T> leftNode = null, RBNode<T> rightNode = null, RBNode<T> parent = null)
+        public RBValNode(T val, RBNode<T> leftNode = null, RBNode<T> rightNode = null, RBNode<T> parent = null)
         {
             this.val = val;
             left = leftNode;
+            if (leftNode == null) left = new RBNullNode<T>();
             right = rightNode;
+            if (rightNode == null) right = new RBNullNode<T>();
             this.parent = parent;
-        }
-
-
-
-        public int Balance
-        {
-            get
-            {
-                int leftHeight = 0;
-                int rightHeight = 0;
-                if (left == null)
-                {
-                    leftHeight = 0;
-                }
-                else
-                {
-                    leftHeight = left.Height;
-                }
-                if (right == null)
-                {
-                    rightHeight = 0;
-                }
-                else
-                {
-                    rightHeight = right.Height;
-                }
-
-                return rightHeight - leftHeight;
-            }
-        }
-        public int Height
-        {
-            get
-            {
-                if (left == null && right == null)
-                    return 1;
-
-                int leftHeight;
-                if (left == null)
-                {
-                    leftHeight = 0;
-                }
-                else
-                {
-                    leftHeight = left.Height;
-                }
-                int rightHeight;
-                if (right == null)
-                {
-                    rightHeight = 0;
-                }
-                else
-                {
-                    rightHeight = right.Height;
-                }
-
-                return ((leftHeight < rightHeight) ? rightHeight + 1 : leftHeight + 1);
-            }
         }
 
 

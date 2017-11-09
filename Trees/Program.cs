@@ -13,8 +13,7 @@ namespace Trees
 {
     class MainClass
     {
-		//This is painstakingly coding trees: https://www.youtube.com/watch?v=z1KDRTKpPZw
-
+        
 		public static void Main(string[] args)
         {
 
@@ -41,7 +40,8 @@ namespace Trees
             /*tree.Add(14);
             tree.Add(16);
             tree.Add(15);*/
-
+        
+  
             Random randy = new Random();
             Console.WriteLine("Running the AlexTester machine!");
             for (int i = 0; i < 15; i++){

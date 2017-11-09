@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace Trees
 {
-    interface RBNode<T>
+    abstract class RBNode<T>
     {
-        RBTree<T>.Colors color;
-        
+        public Enums.Colors color { get; set; }
+        public RBNode<T> parent { get; set; }
+        public RBNode<T> left { get; set; }
+        public RBNode<T> right { get; set; }
+        public T val { get; }
 
     }
 }

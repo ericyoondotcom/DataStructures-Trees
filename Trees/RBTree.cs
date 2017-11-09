@@ -27,36 +27,36 @@ namespace Trees
 
         public RBTree(T firstNodeVal)
         {
-            topNode = new RBNode<T>(firstNodeVal);
+            topNode = new RBValNode<T>(firstNodeVal);
         }
 
         public void Add(T newItem)
         {
-            AddWithNode(new RBNode<T>(newItem));
+            AddWithNode(new RBValNode<T>(newItem));
 
         }
-        public void AddWithNode(RBNode<T> newItem)
+        public void AddWithNode(RBValNode<T> newItem)
         {
             if (topNode == null)
             {
                 topNode = newItem;
-                newItem.left = new RBNode<T>(null, null, null, newItem);
+                newItem.left = new RBNullNode<T>();
                 InsertCheck(newItem);
                 return;
             }
             AddLoop(newItem, topNode);
         }
-        void AddLoop(RBNode<T> newItem, RBNode<T> curr)
+        void AddLoop(RBValNode<T> newItem, RBNode<T> curr)
         {
             int comparison = newItem.val.CompareTo(curr.val);
 
             if (comparison < 0)
             {
-                if (curr.left == null)
+                if (curr.left.val == null)
                 {
                     curr.left = newItem;
                     newItem.parent = curr;
-                    newItem.color = Colors.red;
+                    newItem.color = Enums.Colors.red;
                     InsertCheck(newItem);
                     return;
                 }
@@ -64,11 +64,11 @@ namespace Trees
             }
             else
             {
-                if (curr.right == null)
+                if (curr.right.val == null)
                 {
                     curr.right = newItem;
                     newItem.parent = curr;
-                    newItem.color = Colors.red;
+                    newItem.color = Enums.Colors.red;
                     InsertCheck(newItem);
                     return;
                 }
@@ -80,9 +80,18 @@ namespace Trees
         {
             if(me != topNode)
             {
+                RBNode<T> uncle = (me.parent.parent.left == me.parent) ? me.parent.parent.right : me.parent.parent.left;
 
+                if(uncle.color == Enums.Colors.red){
+                    me.parent.color = Enums.Colors.black;
+                    uncle.color = Enums.Colors.black;
+                    me.parent.parent.color = Enums.Colors.red;
+                    InsertCheck(me.parent.parent);
+                }else{
+                    
+                }
             }
-            topNode.color = Colors.black;
+            topNode.color = Enums.Colors.black;
         }
     }
 }
