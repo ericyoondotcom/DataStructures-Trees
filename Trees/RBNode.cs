@@ -12,7 +12,7 @@ namespace Trees
         public RBNode<T> parent { get; set; }
         public RBNode<T> left { get; set; }
         public RBNode<T> right { get; set; }
-        public T val { get; }
+        public T val { get; set; }
 
     }
 }

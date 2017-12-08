@@ -9,11 +9,11 @@ namespace Trees
     class RBNullNode<T> : RBNode<T>
     {
         private T v;
-        private RBNode<T> rbnv;
-        public RBNode<T> parent { get; set; }
-        public RBNode<T> left { get { return rbnv; } set { throw new NotImplementedException("Sorry..."); } }
-        public RBNode<T> right { get { return rbnv; } set { throw new NotImplementedException("Sorry..."); } }
-        public Enums.Colors color { get; set; }
-        public T val => v;
+        private RBNode<T> rbnv;        
+        public override RBNode<T> parent { get; set; }
+        public override RBNode<T> left { get { return rbnv; } set { throw new NotImplementedException("Sorry..."); } }
+        public override RBNode<T> right { get { return rbnv; } set { throw new NotImplementedException("Sorry..."); } }
+        public override Enums.Colors color { get; set; }
+        public override l => v;
     }
 }
