@@ -52,7 +52,7 @@ namespace Trees
 
             if (comparison < 0)
             {
-                if (curr.left.val == null)
+                if (curr.left is RBNullNode<T>)
                 {
                     curr.left = newItem;
                     newItem.parent = curr;
@@ -64,7 +64,8 @@ namespace Trees
             }
             else
             {
-                if (curr.right.val == null)
+                
+                if (curr.right is RBNullNode<T>)
                 {
                     curr.right = newItem;
                     newItem.parent = curr;
@@ -78,9 +79,11 @@ namespace Trees
         
         void InsertCheck(RBNode<T> me)
         {
-            if(me != topNode) //If x is root, change color to BLACK
+
+            if(me != topNode && me.parent.color != Enums.Colors.black) //If x is root, change color to BLACK
             {
-                //Do the following if x's parent is not Black or x is not root
+                //Do the following if x's parent is not Black AND x is not root
+
                 RBNode<T> uncle = (me.parent.parent.left == me.parent) ? me.parent.parent.right : me.parent.parent.left;
 
                 if(uncle.color == Enums.Colors.red){ //if x's uncle is red
@@ -88,7 +91,7 @@ namespace Trees
                     uncle.color = Enums.Colors.black; //change color of uncle to black
                     me.parent.parent.color = Enums.Colors.red; //make grandparent red
                     InsertCheck(me.parent.parent); //rule check my grandparent
-                }else{ //if x's uncle is black
+                }else{ //if x's uncle is black (OR NULLNODE: Nullnodes are black!)
                     if (me.parent.right == me){ //if i'm a right child
 						if (me.parent.parent.right == me.parent)
 						{
@@ -163,18 +166,18 @@ namespace Trees
 			Console.WriteLine("Doing a left rotation!");
 			node.right.right = node.right?.right;
 
-			if (node.right.right != null)
+            if (!(node.right.right is RBNullNode<T>))
 			{
 				node.right.right.parent = node.right;
 			}
 
 			node.right = node.right.left;
-			if (node.left != null)
+            if (!(node.left is RBNullNode<T>))
 			{
 				node.left.parent = node;
 			}
 
-			if (node.parent == null)
+            if (node.parent == null)
 			{
 				topNode = node.right;
 
@@ -195,22 +198,23 @@ namespace Trees
 					throw new Exception("Luke... I'm... Not... Your... Father!");
 				}
 			}
+            if(!(node.right is RBNullNode<T>))
 			node.right.parent = node.parent;
 
 			node.right.left = node;
-			node.parent = node.right;
+			node.parent = node.right; //also a problem line
         }
 
         void RotateNodeRight(RBNode<T> node){
 			Console.WriteLine("Doing a right rotation!");
 
 			node.left.left = node.left?.left;
-			if (node.left.left != null)
+			if (!(node.left.left is RBNullNode<T>))
 			{
 				node.left.left.parent = node.left;
 			}
 			node.left = node.left.right;
-			if (node.left.right != null)
+			if (!(node.left.right is RBNullNode<T>))
 				node.left.right.parent = node;
 
 
@@ -234,6 +238,7 @@ namespace Trees
 					throw new Exception("Luke... I'm... Not... Your... Father!");
 				}
 			}
+            if (!(node.left is RBNullNode<T>))
 			node.left.parent = node.parent;
 			node.left.right = node;
             node.parent = node.left;

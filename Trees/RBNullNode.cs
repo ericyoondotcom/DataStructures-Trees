@@ -8,12 +8,17 @@ namespace Trees
 {
     class RBNullNode<T> : RBNode<T>
     {
+        public RBNullNode()
+        {
+            base.color = Enums.Colors.black;
+        }
+
         private T v;
         private RBNode<T> rbnv;        
         public override RBNode<T> parent { get; set; }
         public override RBNode<T> left { get { return rbnv; } set { throw new NotImplementedException("Sorry..."); } }
         public override RBNode<T> right { get { return rbnv; } set { throw new NotImplementedException("Sorry..."); } }
-        public override Enums.Colors color { get; set; }
-        public override l => v;
+        public override Enums.Colors color { get { return Enums.Colors.black; } set { throw new NotImplementedException("Oopsies!");} }
+        public override T val => v;
     }
 }
