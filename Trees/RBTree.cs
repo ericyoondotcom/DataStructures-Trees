@@ -160,6 +160,7 @@ namespace Trees
 			Console.WriteLine("Doing a left rotation!");
 
             node.right.left = node;
+            
             if (node.parent != null)
             {
                 node.right.parent = node.parent;
@@ -175,13 +176,15 @@ namespace Trees
                 topNode = node.right;
             }
             node.parent = node.right;
-
+            node.right = new RBNullNode<T>();
         }
 
-        void RotateNodeRight(RBNode<T> node){
+        void RotateNodeRight(RBNode<T> node)
+        {
 			Console.WriteLine("Doing a right rotation!");
 
             node.left.right = node;
+            
 			if (node.parent != null)
 			{
                 node.left.parent = node.parent;
@@ -204,8 +207,9 @@ namespace Trees
                 topNode = node.left;
 			}
             node.parent = node.left;
+            node.left = new RBNullNode<T>();
 
-		}
+        }
 
 
 
