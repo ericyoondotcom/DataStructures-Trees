@@ -10,7 +10,8 @@ namespace Trees
     {
         public RBNullNode()
         {
-            base.color = Enums.Colors.black;
+			//To workaround https://developercommunity.visualstudio.com/content/problem/171231/virtual-property-always-showing-base-value-in-debu.html
+			base.color = Enums.Colors.black;
         }
 
         private T v;

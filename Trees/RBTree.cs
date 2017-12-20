@@ -164,85 +164,30 @@ namespace Trees
 
         void RotateNodeLeft(RBNode<T> node){
 			Console.WriteLine("Doing a left rotation!");
-			node.right.right = node.right?.right;
 
-            if (!(node.right.right is RBNullNode<T>))
-			{
-				node.right.right.parent = node.right;
-			}
+            node.right.left = node;
+            if (node.parent != null)
+            {
+                node.right.parent = node.parent;
 
-			node.right = node.right.left;
-            if (!(node.left is RBNullNode<T>))
-			{
-				node.left.parent = node;
-			}
+                if(node.parent.left == node){
+                    node.parent.left = node.right;
+                }else if(node.parent.right == node){
+                    node.parent.right = node.right;
+                }else{
+                    throw new Exception("I'm not your parent");
+                }
+            }else{
+                topNode = node.right;
+            }
+            node.parent = node.right;
 
-            if (node.parent == null)
-			{
-				topNode = node.right;
-
-			}
-			else
-			{
-
-				if (node.parent.left == node)
-				{
-					node.parent.left = node.right;
-				}
-				else if (node.parent.right == node)
-				{
-					node.parent.right = node.right;
-				}
-				else
-				{
-					throw new Exception("Luke... I'm... Not... Your... Father!");
-				}
-			}
-            if(!(node.right is RBNullNode<T>))
-			node.right.parent = node.parent;
-
-			node.right.left = node;
-			node.parent = node.right; //also a problem line
         }
 
         void RotateNodeRight(RBNode<T> node){
 			Console.WriteLine("Doing a right rotation!");
 
-			node.left.left = node.left?.left;
-			if (!(node.left.left is RBNullNode<T>))
-			{
-				node.left.left.parent = node.left;
-			}
-			node.left = node.left.right;
-			if (!(node.left.right is RBNullNode<T>))
-				node.left.right.parent = node;
-
-
-			if (node.parent == null)
-			{
-				topNode = node.left;
-			}
-			else
-			{
-
-				if (node.parent.left == node)
-				{
-					node.parent.left = node.left;
-				}
-				else if (node.parent.right == node)
-				{
-					node.parent.right = node.left;
-				}
-				else
-				{
-					throw new Exception("Luke... I'm... Not... Your... Father!");
-				}
-			}
-            if (!(node.left is RBNullNode<T>))
-			node.left.parent = node.parent;
-			node.left.right = node;
-            node.parent = node.left;
-        }
+		}
 
 
 
