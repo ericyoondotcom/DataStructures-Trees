@@ -106,17 +106,13 @@ namespace Trees
 						else if (me.parent.parent.left == me.parent)
 						{
                             //left-right case
-                            RotateNodeLeft(me.parent); //rotate parent left
-							if (me.parent.parent.left == me.parent) //and check left-left case
-							{
-								//left-left case
-								RotateNodeRight(me.parent.parent); //rotate grandparent right
-								//and swap grandparent and parent colors
-								var swapColor = me.parent.color;
-								me.parent.color = me.parent.parent.color;
-								me.parent.parent.color = swapColor;
-							}
+                            RotateNodeLeft(me.parent);
 
+                            RotateNodeRight(me.parent); //rotate grandparent right
+													   //and swap grandparent and parent colors
+							var swapColor = me.color;
+							me.color = me.parent.color;
+							me.parent.color = swapColor;
 						}
 						else
 						{
@@ -127,16 +123,14 @@ namespace Trees
 						{
                             //right-left case
                             RotateNodeRight(me.parent);
-							if (me.parent.parent.right == me.parent)
-							{
-								//right-right case
-								RotateNodeLeft(me.parent.parent); //rotate grandparent left
-								//and swap grandparent and parent colors
-								var swapColor = me.parent.color;
-								me.parent.color = me.parent.parent.color;
-								me.parent.parent.color = swapColor;
+							
+							RotateNodeLeft(me.parent); //rotate grandparent left
+							//and swap grandparent and parent colors
+							var swapColor = me.color;
+							me.color = me.parent.color;
+							me.parent.color = swapColor;
 
-							}
+							
 
 						}
 						else if (me.parent.parent.left == me.parent)
