@@ -187,6 +187,30 @@ namespace Trees
         void RotateNodeRight(RBNode<T> node){
 			Console.WriteLine("Doing a right rotation!");
 
+            node.left.right = node;
+			if (node.parent != null)
+			{
+                node.left.parent = node.parent;
+
+				if (node.parent.left == node)
+				{
+                    node.parent.left = node.left;
+				}
+				else if (node.parent.right == node)
+				{
+                    node.parent.right = node.left;
+				}
+				else
+				{
+					throw new Exception("I'm not your parent");
+				}
+			}
+			else
+			{
+                topNode = node.left;
+			}
+            node.parent = node.left;
+
 		}
 
 

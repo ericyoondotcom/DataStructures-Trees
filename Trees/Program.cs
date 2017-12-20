@@ -21,8 +21,8 @@ namespace Trees
             RBTree<int> tree = new RBTree<int>();
 
             tree.Add(10);
-            tree.Add(11);
-            tree.Add(12);
+            tree.Add(9);
+            tree.Add(8);
 
 
         }
