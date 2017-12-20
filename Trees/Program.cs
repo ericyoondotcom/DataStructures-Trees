@@ -16,7 +16,7 @@ namespace Trees
 
         public static void Main(string[] args)
         {
-
+            
             Console.WriteLine("Hello World!");
             RBTree<int> tree = new RBTree<int>();
 
@@ -26,6 +26,8 @@ namespace Trees
             tree.Add(8);
             tree.Add(4);
             tree.Add(3);
+            //Up to here it works
+            //then, after the second 3, it does something weird
             tree.Add(3);
 
 
