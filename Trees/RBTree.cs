@@ -213,6 +213,57 @@ namespace Trees
         }
 
 
+        void Delete(RBNode<T> nodeToDelete){
+            //Do a BST delete. If Delete() is called on another node (in a special case) then the check is CANCELED on the original "deleted" node.
+            if (nodeToDelete.left is RBNullNode<T> && nodeToDelete.right is RBNullNode<T>){
+                //no children
+                RBNode<T> oldNode = nodeToDelete;
+                RBNode<T> newNode = new RBNullNode<T>();
+                nodeToDelete = newNode;
+                DeleteCheck(oldNode, newNode);
+
+            }else if(nodeToDelete.right is RBNullNode<T>){
+				//the only child is left
+				RBNode<T> oldNode = nodeToDelete;
+                RBNode<T> newNode = nodeToDelete.left;
+                nodeToDelete = newNode;
+
+                DeleteCheck(oldNode, newNode);
+            }else if (nodeToDelete.left is RBNullNode<T>){
+				//only child is right
+				RBNode<T> oldNode = nodeToDelete;
+				RBNode<T> newNode = nodeToDelete.right;
+                nodeToDelete = newNode;
+
+                DeleteCheck(oldNode, newNode);
+            }else {
+				
+            }
+        }
+
+        RBNode<T> FindRightestLeftChild(RBNode<T> me){
+            
+        }
+
+
+        /// <summary>
+        /// Checks after deletion.
+        /// </summary>
+        /// <param name="u">The old node that got deleted</param>
+        /// <param name="v">Te new node that replaced the old node. This can be a nil node</param>
+        void DeleteCheck(RBNode<T> u, RBNode<T> v){ //v is node to be deleted, u is the one that replaces it
+            if(u.color == Enums.Colors.red || v.color == Enums.Colors.red){
+                u.color = Enums.Colors.black;
+                
+            }else{
+                //if both u and v are black
+
+
+
+            }
+        }
+
+
 
     }
 }
