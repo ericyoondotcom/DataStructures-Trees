@@ -1,4 +1,4 @@
-﻿﻿using System;
+﻿﻿﻿using System;
 
 /*
 
@@ -26,8 +26,6 @@ namespace Trees
             tree.Add(8);
             tree.Add(4);
             tree.Add(3);
-            //Up to here it works
-            //then, after the second 3, it does something weird
             tree.Add(3);
 
 

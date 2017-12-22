@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -87,10 +87,12 @@ namespace Trees
                 RBNode<T> uncle = (me.parent.parent.left == me.parent) ? me.parent.parent.right : me.parent.parent.left;
 
                 if(uncle.color == Enums.Colors.red){ //if x's uncle is red
+                    
                     me.parent.color = Enums.Colors.black; //change color of parent to black
                     uncle.color = Enums.Colors.black; //change color of uncle to black
                     me.parent.parent.color = Enums.Colors.red; //make grandparent red
                     InsertCheck(me.parent.parent); //rule check my grandparent
+
                 }else{ //if x's uncle is black (OR NULLNODE: Nullnodes are black!)
                     if (me.parent.right == me){ //if i'm a right child
 						if (me.parent.parent.right == me.parent)
@@ -98,9 +100,9 @@ namespace Trees
 							//right-right case
 							RotateNodeLeft(me.parent.parent); //rotate grandparent left
                             //and swap grandparent and parent colors
-							var swapColor = me.parent.color;
-							me.parent.color = me.parent.parent.color;
-							me.parent.parent.color = swapColor;
+							var swapColor = me.left.color;
+                            me.left.color = me.color;
+							me.color = swapColor;
 
 						}
 						else if (me.parent.parent.left == me.parent)
@@ -110,9 +112,9 @@ namespace Trees
 
                             RotateNodeRight(me.parent); //rotate grandparent right
 													   //and swap grandparent and parent colors
-							var swapColor = me.color;
-							me.color = me.parent.color;
-							me.parent.color = swapColor;
+							var swapColor = me.right.color;
+							me.right.color = me.color;
+							me.color = swapColor;
 						}
 						else
 						{
@@ -123,12 +125,11 @@ namespace Trees
 						{
                             //right-left case
                             RotateNodeRight(me.parent);
-							
 							RotateNodeLeft(me.parent); //rotate grandparent left
-							//and swap grandparent and parent colors
-							var swapColor = me.color;
-							me.color = me.parent.color;
-							me.parent.color = swapColor;
+                            //and swap grandparent and parent colors (REWORDED: MY PARENT AND SIBILING)
+							var swapColor = me.left.color;
+							me.left.color = me.color;
+							me.color = swapColor;
 
 							
 
@@ -138,9 +139,9 @@ namespace Trees
                             //left-left case
                             RotateNodeRight(me.parent.parent); //rotate grandparent right
                             //and swap grandparent and parent colors
-                            var swapColor = me.parent.color;
-                            me.parent.color = me.parent.parent.color;
-                            me.parent.parent.color = swapColor;
+                            var swapColor = me.right.color;
+                            me.right.color = me.color;
+                            me.color = swapColor;
 						}
 						else
 						{
