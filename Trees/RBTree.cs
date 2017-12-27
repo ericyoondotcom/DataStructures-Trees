@@ -194,6 +194,7 @@ namespace Trees
             }
             node.parent = node.right;
             node.right = oldLeftNode;
+            oldLeftNode.parent = node;
         }
 
         void RotateNodeRight(RBNode<T> node)
@@ -225,7 +226,7 @@ namespace Trees
             }
             node.parent = node.left;
             node.left = oldRightNode;
-
+            oldRightNode.parent = node;
         }
 
         public RBNode<T> FindNodeWithValue(T val)
@@ -274,8 +275,23 @@ namespace Trees
                 //no children
                 RBNode<T> oldNode = nodeToDelete;
                 RBNode<T> newNode = new RBNullNode<T>();
-                nodeToDelete = newNode;
+
+
+               
                 DeleteCheck(oldNode, newNode);
+
+                if(nodeToDelete == topNode){ //roundabout way to say nodeToDelete = newNode. But that doesn't work because of refs
+                    topNode = newNode;
+                    topNode.parent = null;
+                }else if (nodeToDelete.parent.left == nodeToDelete){
+                    nodeToDelete.parent.left = newNode;
+
+                }else if(nodeToDelete.parent.right == nodeToDelete){
+                    nodeToDelete.parent.right = newNode;
+                }else{
+                    throw new Exception("Some kind of parenting issue");
+                }
+
 
             }
             else if (nodeToDelete.right is RBNullNode<T>)
@@ -283,18 +299,56 @@ namespace Trees
                 //the only child is left
                 RBNode<T> oldNode = nodeToDelete;
                 RBNode<T> newNode = nodeToDelete.left;
-                nodeToDelete = newNode;
+
 
                 DeleteCheck(oldNode, newNode);
+
+				if (nodeToDelete == topNode)
+				{ //roundabout way to say nodeToDelete = newNode. But that doesn't work because of refs
+					topNode = newNode;
+				}
+				else if (nodeToDelete.parent.left == nodeToDelete)
+				{
+					nodeToDelete.parent.left = newNode;
+				}
+				else if (nodeToDelete.parent.right == nodeToDelete)
+				{
+					nodeToDelete.parent.right = newNode;
+				}
+				else
+				{
+					throw new Exception("Some kind of parenting issue");
+				}
+
+
             }
             else if (nodeToDelete.left is RBNullNode<T>)
             {
                 //only child is right
                 RBNode<T> oldNode = nodeToDelete;
                 RBNode<T> newNode = nodeToDelete.right;
-                nodeToDelete = newNode;
 
                 DeleteCheck(oldNode, newNode);
+
+				if (nodeToDelete == topNode)
+				{ //roundabout way to say nodeToDelete = newNode. But that doesn't work because of refs
+					topNode = newNode;
+				}
+				else if (nodeToDelete.parent.left == nodeToDelete)
+				{
+					nodeToDelete.parent.left = newNode;
+				}
+				else if (nodeToDelete.parent.right == nodeToDelete)
+				{
+					nodeToDelete.parent.right = newNode;
+				}
+				else
+				{
+					throw new Exception("Some kind of parenting issue");
+				}
+
+
+				
             }
             else
             {
